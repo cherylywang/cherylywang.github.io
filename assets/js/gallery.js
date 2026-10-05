@@ -9,6 +9,27 @@
 
 (function($) {
 
+	// Mobile top bar: group the page title with the "Menu" toggle so they
+	// sit side by side in the top-right corner. #navPanelToggle is created
+	// by the vendor main.js and positioned independently (fixed), so we
+	// move both it and .page-title into one shared flex container rather
+	// than trying to align two separate fixed-position elements by guessing
+	// pixel offsets. Runs on every page (not just ones with a gallery).
+	$(function() {
+
+		var $pageTitle = $('.page-title'),
+			$navToggle = $('#navPanelToggle');
+
+		if ($pageTitle.length && $navToggle.length) {
+			var $topbar = $('<div class="mobile-topbar"></div>');
+			$pageTitle.detach();
+			$navToggle.detach();
+			$topbar.append($pageTitle).append($navToggle);
+			$('body').append($topbar);
+		}
+
+	});
+
 	$(function() {
 
 		var $lightbox = $('#gallery-lightbox');

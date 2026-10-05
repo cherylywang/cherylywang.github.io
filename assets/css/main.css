@@ -4923,7 +4923,6 @@ input, select, textarea {
 	}
 
 		body.lightbox-open #header.simple-header .logo,
-		body.lightbox-open #header.simple-header .page-title,
 		body.lightbox-open #header.simple-header #nav ul.links li a {
 			color: #f5f0e6;
 			transition: color 0.25s ease;
@@ -4977,17 +4976,6 @@ input, select, textarea {
 		text-align: left;
 	}
 
-		#header.simple-header .logo-wrap {
-			display: -moz-flex;
-			display: -webkit-flex;
-			display: -ms-flex;
-			display: flex;
-			-moz-flex-direction: column;
-			-webkit-flex-direction: column;
-			-ms-flex-direction: column;
-			flex-direction: column;
-		}
-
 		#header.simple-header .logo {
 			border: 0 !important;
 			padding: 0;
@@ -4999,26 +4987,61 @@ input, select, textarea {
 		}
 
 		#header.simple-header .page-title {
-			/* Only shown on mobile: #nav (the Traditional Arts / Digital    */
-			/* Arts / Contact links) is hidden below 980px in favor of the  */
-			/* "Menu" toggle + slide-out panel, so without this there is no */
-			/* indication of which page you're currently on.                */
+			/* Hidden here: on mobile this gets detached by JS and moved   */
+			/* into .mobile-topbar (next to the Menu toggle) — see below. */
 			display: none;
-			color: #717981;
-			font-family: "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif;
-			font-size: 0.8rem;
-			font-weight: 700;
-			letter-spacing: 0.05em;
-			margin-top: 0.3rem;
-			text-transform: uppercase;
 		}
+
+	/* Mobile-only top bar: holds the page title + Menu toggle together,  */
+	/* grouped side by side in the top-right corner. #navPanelToggle is   */
+	/* normally appended to #wrapper directly (by the vendor main.js) and */
+	/* positioned independently; gallery.js detaches it along with       */
+	/* .page-title into this shared container so they can sit in one row */
+	/* without guessing fixed pixel offsets between two unrelated        */
+	/* position:fixed elements.                                          */
+	.mobile-topbar {
+		display: none;
+	}
 
 		@media screen and (max-width: 980px) {
 
-			#header.simple-header .page-title {
-				display: block;
+			.mobile-topbar {
+				display: -moz-flex;
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+				-moz-align-items: center;
+				-webkit-align-items: center;
+				-ms-align-items: center;
+				align-items: center;
+				gap: 0.6rem;
+				position: fixed;
+				top: 0.75rem;
+				right: 0.75rem;
+				z-index: 10001;
 			}
 
+				.mobile-topbar .page-title {
+					display: block;
+					color: #717981;
+					font-family: "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif;
+					font-size: 0.75rem;
+					font-weight: 700;
+					letter-spacing: 0.04em;
+					text-transform: uppercase;
+					white-space: nowrap;
+				}
+
+				.mobile-topbar #navPanelToggle {
+					position: static;
+					top: auto;
+					right: auto;
+				}
+
+		}
+
+		body.lightbox-open .mobile-topbar .page-title {
+			color: #f5f0e6;
 		}
 
 		#header.simple-header #nav {
