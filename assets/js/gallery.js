@@ -93,12 +93,28 @@
 		// playback isn't dependent on precisely hitting the browser's own
 		// (small, inconsistently-placed) native play control. Hides
 		// itself once the video is playing, and reappears if paused.
+		// The native <video controls> bar is intentionally not used —
+		// on mobile Safari it renders a persistent dark overlay + its
+		// own pause icon on top of this custom one and doesn't reliably
+		// auto-hide, blocking the video. Clicking the video itself
+		// toggles play/pause instead.
 			if ($video.length) {
 
 				$videoPlay.on('click', function(e) {
 
 					e.stopPropagation();
 					$video[0].play();
+
+				});
+
+				$video.on('click', function(e) {
+
+					e.stopPropagation();
+
+					if ($video[0].paused)
+						$video[0].play();
+					else
+						$video[0].pause();
 
 				});
 
