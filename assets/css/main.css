@@ -4828,6 +4828,34 @@ input, select, textarea {
 			object-fit: contain;
 		}
 
+		.gallery-lightbox-video {
+			display: none;
+			max-width: 100%;
+			max-height: 80vh;
+		}
+
+		.gallery-lightbox-video-play {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 4rem;
+			height: 4rem;
+			line-height: 4rem;
+			text-align: center;
+			font-size: 1.4rem;
+			color: #fff;
+			background: rgba(0, 0, 0, 0.55);
+			border-radius: 50%;
+			cursor: pointer;
+			z-index: 2;
+		}
+
+			.gallery-lightbox-video-play:hover {
+				background: rgba(0, 0, 0, 0.75);
+			}
+
 		.gallery-lightbox-info {
 			position: fixed;
 			left: 2rem;
@@ -5067,6 +5095,33 @@ input, select, textarea {
 			}
 
 		}
+
+/* Digital Arts gallery: a true 2-column grid (not the masonry columns
+   above) so items land in fixed left/right row pairs regardless of each
+   image's height — the masonry layout fills one column at a time, which
+   doesn't give predictable pairing for mixed image/video content. */
+	.gallery-grid-paired {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		align-items: center;
+		-moz-columns: initial;
+		-webkit-columns: initial;
+		columns: initial;
+	}
+
+		.gallery-grid-paired .gallery-item {
+			-webkit-column-break-inside: initial;
+			page-break-inside: initial;
+			break-inside: initial;
+		}
+
+	@media screen and (max-width: 736px) {
+
+		.gallery-grid-paired {
+			grid-template-columns: 1fr;
+		}
+
+	}
 
 /* ------------------------------------------------------------------ */
 /* Contact page: card with image + form (Jack Chin reference style)    */

@@ -1,9 +1,10 @@
 /*
 	Cheryl Wang's site — image gallery lightbox.
 	Click a .gallery-item thumbnail to open #gallery-lightbox showing the
-	full image plus its title/date/description (read from data-* attrs).
-	Once open, use the arrow buttons or arrow keys to browse to the
-	previous/next image without closing the lightbox.
+	full image (or video, if the item has a data-video attribute) plus its
+	title/date/description (read from data-* attrs). Once open, use the
+	arrow buttons or arrow keys to browse to the previous/next item without
+	closing the lightbox.
 */
 
 (function($) {
@@ -17,6 +18,8 @@
 
 		var $items = $('.gallery-item'),
 			$image = $lightbox.find('.gallery-lightbox-image'),
+			$video = $lightbox.find('.gallery-lightbox-video'),
+			$videoPlay = $lightbox.find('.gallery-lightbox-video-play'),
 			$title = $lightbox.find('.gallery-lightbox-title'),
 			$date = $lightbox.find('.gallery-lightbox-date'),
 			$desc = $lightbox.find('.gallery-lightbox-desc'),
@@ -32,9 +35,31 @@
 
 			currentIndex = index;
 
-			var $item = $items.eq(currentIndex);
+			var $item = $items.eq(currentIndex),
+				videoSrc = $item.data('video');
 
-			$image.attr('src', $item.find('img').attr('src'));
+			// Stop any currently-playing video before switching items.
+				if ($video.length) {
+					$video.trigger('pause');
+					$video.attr('src', '');
+				}
+
+			if (videoSrc) {
+
+				$image.hide();
+				$video.show().attr('src', videoSrc);
+				$video[0].load();
+				$videoPlay.show();
+
+			}
+			else {
+
+				$video.hide();
+				$videoPlay.hide();
+				$image.show().attr('src', $item.find('img').attr('src'));
+
+			}
+
 			$title.text($item.data('title'));
 			$date.text($item.data('date'));
 			$desc.text($item.data('desc'));
@@ -45,6 +70,11 @@
 		}
 
 		function hide() {
+
+			if ($video.length) {
+				$video.trigger('pause');
+				$video.attr('src', '');
+			}
 
 			$lightbox.removeClass('active');
 			$('body').removeClass('lightbox-open');
@@ -58,6 +88,33 @@
 				show($items.index(this));
 
 			});
+
+		// Custom play button: a reliable, always-clickable overlay so
+		// playback isn't dependent on precisely hitting the browser's own
+		// (small, inconsistently-placed) native play control. Hides
+		// itself once the video is playing, and reappears if paused.
+			if ($video.length) {
+
+				$videoPlay.on('click', function(e) {
+
+					e.stopPropagation();
+					$video[0].play();
+
+				});
+
+				$video.on('play', function() {
+					$videoPlay.hide();
+				});
+
+				$video.on('pause', function() {
+					$videoPlay.show();
+				});
+
+				$video.on('ended', function() {
+					$videoPlay.show();
+				});
+
+			}
 
 		// Prev / next arrows.
 			$lightbox.find('.gallery-lightbox-prev').on('click', function(e) {
