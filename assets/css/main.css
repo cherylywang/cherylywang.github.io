@@ -4496,7 +4496,14 @@ input, select, textarea {
 		top: 0.75rem;
 		right: 0.75rem;
 		border: 0;
-		color: #ffffff;
+		/* This site has no dark hero banner (removed in our redesign), so
+		   the toggle must always be in its "scrolled past header" look —
+		   otherwise it defaults to white-on-white and is invisible until
+		   the user scrolls (the template assumes a tall dark intro image
+		   behind it at the top of the page). */
+		background-color: rgba(255, 255, 255, 0.875);
+		box-shadow: 0 0.125rem 0.75rem 0 rgba(30, 37, 45, 0.25);
+		color: #212931;
 		font-family: "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		font-size: 0.9rem;
 		font-weight: 900;
@@ -4505,6 +4512,10 @@ input, select, textarea {
 		text-transform: uppercase;
 		z-index: 10001;
 	}
+
+		#navPanelToggle:hover {
+			background-color: #ffffff;
+		}
 
 		#navPanelToggle:before {
 			-moz-osx-font-smoothing: grayscale;
@@ -4523,16 +4534,6 @@ input, select, textarea {
 			content: '\f0c9';
 			margin-right: 0.5rem;
 		}
-
-		#navPanelToggle.alt {
-			background-color: rgba(255, 255, 255, 0.875);
-			box-shadow: 0 0.125rem 0.75rem 0 rgba(30, 37, 45, 0.25);
-			color: #212931;
-		}
-
-			#navPanelToggle.alt:hover {
-				background-color: #ffffff;
-			}
 
 		@media screen and (max-width: 980px) {
 
