@@ -4923,6 +4923,7 @@ input, select, textarea {
 	}
 
 		body.lightbox-open #header.simple-header .logo,
+		body.lightbox-open #header.simple-header .page-title,
 		body.lightbox-open #header.simple-header #nav ul.links li a {
 			color: #f5f0e6;
 			transition: color 0.25s ease;
@@ -4976,6 +4977,17 @@ input, select, textarea {
 		text-align: left;
 	}
 
+		#header.simple-header .logo-wrap {
+			display: -moz-flex;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			-moz-flex-direction: column;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+		}
+
 		#header.simple-header .logo {
 			border: 0 !important;
 			padding: 0;
@@ -4984,6 +4996,29 @@ input, select, textarea {
 			font-weight: 700;
 			letter-spacing: normal;
 			text-transform: none;
+		}
+
+		#header.simple-header .page-title {
+			/* Only shown on mobile: #nav (the Traditional Arts / Digital    */
+			/* Arts / Contact links) is hidden below 980px in favor of the  */
+			/* "Menu" toggle + slide-out panel, so without this there is no */
+			/* indication of which page you're currently on.                */
+			display: none;
+			color: #717981;
+			font-family: "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 0.8rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			margin-top: 0.3rem;
+			text-transform: uppercase;
+		}
+
+		@media screen and (max-width: 980px) {
+
+			#header.simple-header .page-title {
+				display: block;
+			}
+
 		}
 
 		#header.simple-header #nav {
