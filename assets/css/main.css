@@ -4939,6 +4939,15 @@ input, select, textarea {
 			text-decoration: underline;
 		}
 
+	/* #navPanelToggle (mobile hamburger) isn't inside #header, so it does  */
+	/* not get the elevated z-index above. Since #header is transparent    */
+	/* here, the toggle still renders on top visually, but without its own */
+	/* bump it sits *below* #header in stacking order and silently eats    */
+	/* the tap instead of opening the nav panel. Raise it above #header.   */
+	body.lightbox-open #navPanelToggle {
+		z-index: 10003;
+	}
+
 /* ------------------------------------------------------------------ */
 /* Simple top header: name on the left, small pill nav on the right    */
 /* (reference: jackchin.vercel.app layout)                             */
