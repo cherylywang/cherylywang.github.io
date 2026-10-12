@@ -4862,6 +4862,10 @@ input, select, textarea {
 			left: 2rem;
 			bottom: 5rem;
 			max-width: 360px;
+			width: calc(100% - 4rem);
+			padding: 1rem;
+			background: rgba(28, 27, 26, 0.92);
+			border-radius: 4px;
 			color: #f5f0e6;
 			z-index: 2;
 		}
