@@ -5196,6 +5196,35 @@ input, select, textarea {
 	}
 
 /* ------------------------------------------------------------------ */
+/* Crafts piece                                                       */
+/* ------------------------------------------------------------------ */
+
+	#main > .crafts-piece {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+		align-items: center;
+		gap: 3rem;
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 2rem 3rem 3rem;
+	}
+
+		.crafts-piece .gallery-item,
+		.crafts-piece-info p {
+			margin-bottom: 0;
+		}
+
+		@media screen and (max-width: 736px) {
+
+			#main > .crafts-piece {
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+				padding: 1.5rem;
+			}
+
+		}
+
+/* ------------------------------------------------------------------ */
 /* Contact page: card with image + form (Jack Chin reference style)    */
 /* ------------------------------------------------------------------ */
 
@@ -5372,6 +5401,7 @@ input, select, textarea {
 			display: -webkit-flex;
 			display: -ms-flex;
 			display: flex;
+			flex-wrap: wrap;
 			-moz-justify-content: center;
 			-webkit-justify-content: center;
 			-ms-justify-content: center;
