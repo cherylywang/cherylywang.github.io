@@ -5187,12 +5187,6 @@ input, select, textarea {
 			break-inside: initial;
 		}
 
-		.gallery-item-landscape img {
-			aspect-ratio: 510 / 302;
-			object-fit: contain;
-			background-color: #f4f4f4;
-		}
-
 	@media screen and (max-width: 736px) {
 
 		.gallery-grid-paired {
