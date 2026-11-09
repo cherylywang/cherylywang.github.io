@@ -77,7 +77,7 @@
 
 				$video.hide();
 				$videoPlay.hide();
-				$image.show().attr('src', $item.find('img').attr('src'));
+				$image.show().attr('src', $item.data('image') || $item.find('img').attr('src'));
 
 			}
 
